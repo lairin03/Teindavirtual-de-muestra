@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUXE FASHION - Tienda de Ropa Moderna</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="promo-banner">
+        <span>¡ENVÍO GRATIS HOY!</span> Renueva tu estilo con ofertas exclusivas y looks premium.
+    </div>
+    <!-- HEADER CON NAVEGACIÓN Y CARRITO -->
+    <header class="header">
+        <div class="header-top">
+            <div class="logo-container">
+                <i class="fas fa-crown"></i>
+                <h1 class="logo">LUXE FASHION</h1>
+            </div>
+            
+            <div class="header-middle">
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Buscar prendas...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+
+            <div class="header-right">
+                <button class="btn-cart" id="cartBtn">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="#" class="nav-link active" data-category="todos">Todos</a>
+            <a href="#" class="nav-link" data-category="hombre">Hombre</a>
+            <a href="#" class="nav-link" data-category="mujer">Mujer</a>
+            <a href="#" class="nav-link" data-category="accesorios">Accesorios</a>
+            <a href="#" class="nav-link" data-category="ofertas">💥 OFERTAS</a>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION CON ANIMACIÓN -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h2 class="hero-title">ESTILO SIN LÍMITES</h2>
+                <p class="hero-subtitle">Descubre la moda que define tu personalidad</p>
+                <div class="hero-badge">COLECCIÓN EXCLUSIVA</div>
+                <button class="btn-hero">EXPLORAR COLECCIÓN</button>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-item" style="--delay: 0s"><i class="fas fa-shoe-prints"></i></div>
+                <div class="floating-item" style="--delay: 1s"><i class="fas fa-glasses"></i></div>
+                <div class="floating-item" style="--delay: 2s"><i class="fas fa-hat-cowboy"></i></div>
+            </div>
+        </div>
+        <div class="hero-background"></div>
+    </section>
+
+    <!-- FILTROS Y ORDENAMIENTO -->
+    <section class="filters-section">
+        <div class="filters-container">
+            <div class="filter-group">
+                <label>Filtrar por Precio:</label>
+                <input type="range" id="priceFilter" min="0" max="500" value="500" class="price-slider">
+                <span id="priceDisplay">$0 - $500</span>
+            </div>
+            <div class="filter-group">
+                <label>Ordenar por:</label>
+                <select id="sortSelect" class="sort-select">
+                    <option value="nuevo">Más Nuevo</option>
+                    <option value="precio-bajo">Precio: Menor a Mayor</option>
+                    <option value="precio-alto">Precio: Mayor a Menor</option>
+                    <option value="populares">Más Populares</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- GRID DE PRODUCTOS -->
+    <section class="products-section">
+        <div class="products-header">
+            <p class="product-count" id="productsCount">50 productos disponibles</p>
+        </div>
+        <div class="products-grid" id="productsGrid">
+            <!-- Los productos se cargarán dinámicamente aquí -->
+        </div>
+    </section>
+
+    <!-- CARRITO LATERAL -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>Tu Carrito</h2>
+            <button class="close-cart" id="closeCart"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Items del carrito -->
+        </div>
+        <div class="cart-summary">
+            <div class="summary-row">
+                <span>Subtotal:</span>
+                <span id="subtotal">$0.00</span>
+            </div>
+            <div class="summary-row">
+                <span>Envío:</span>
+                <span id="shipping">$0.00</span>
+            </div>
+            <div class="summary-row total">
+                <span>Total:</span>
+                <span id="total">$0.00</span>
+            </div>
+            <button class="btn-checkout" id="checkoutBtn">IR A PAGAR</button>
+            <button class="btn-continue">Seguir Comprando</button>
+        </div>
+    </div>
+
+    <!-- OVERLAY DEL CARRITO -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- MODAL DE PRODUCTO DETALLADO -->
+    <div class="product-modal" id="productModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <img id="modalImage" src="" alt="Producto">
+                </div>
+                <div class="modal-info">
+                    <h2 id="modalTitle"></h2>
+                    <div class="rating">
+                        <span class="stars" id="modalRating"></span>
+                        <span id="reviewCount"></span>
+                    </div>
+                    <div class="price-section">
+                        <span class="price" id="modalPrice"></span>
+                        <span class="discount" id="modalDiscount"></span>
+                    </div>
+                    <p class="description" id="modalDescription"></p>
+                    
+                    <div class="size-selector">
+                        <label>Talla:</label>
+                        <div class="sizes" id="sizeOptions"></div>
+                    </div>
+
+                    <div class="color-selector">
+                        <label>Color:</label>
+                        <div class="colors" id="colorOptions"></div>
+                    </div>
+
+                    <div class="quantity-selector">
+                        <label>Cantidad:</label>
+                        <div class="quantity-control">
+                            <button id="decreaseQty">-</button>
+                            <input type="number" id="quantityInput" value="1" min="1" max="10">
+                            <button id="increaseQty">+</button>
+                        </div>
+                    </div>
+
+                    <button class="btn-add-to-cart" id="addToCartBtn">AGREGAR AL CARRITO</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATIONS -->
+    <div class="toast" id="toast"></div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Sobre Nosotros</h4>
+                <p>LUXE FASHION es tu destino de moda moderna y de calidad. Ofrecemos las mejores prendas con estilo.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <p>Email: info@luxefashion.com</p>
+                <p>Teléfono: +1 (555) 123-4567</p>
+            </div>
+            <div class="footer-section">
+                <h4>Síguenos</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 LUXE FASHION. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
