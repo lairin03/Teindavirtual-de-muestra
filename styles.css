@@ -781,8 +781,8 @@ button, input, select {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: min(700px, 92vw);
-    max-height: 92vh;
+    width: min(720px, 96vw);
+    max-height: 96vh;
     background: rgba(10, 12, 23, 0.98);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 32px;
@@ -810,10 +810,10 @@ button, input, select {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
-    padding: 1.8rem;
-    min-height: 320px;
-    max-height: calc(92vh - 96px);
-    overflow: hidden;
+    padding: 1.4rem 1.8rem 1.8rem;
+    min-height: auto;
+    max-height: calc(96vh - 94px);
+    overflow-y: auto;
 }
 
 .checkout-details {
@@ -824,6 +824,7 @@ button, input, select {
     gap: 1rem;
     min-height: 0;
     overflow-y: auto;
+    max-height: calc(96vh - 170px);
 }
 
 .checkout-details h3 {
@@ -897,8 +898,21 @@ button, input, select {
 }
 
 @media (max-width: 760px) {
+    .checkout-modal {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 28px;
+    }
+
     .checkout-body {
         grid-template-columns: 1fr;
+        padding: 1.2rem 1.2rem 1.5rem;
+        max-height: calc(90vh - 84px);
+    }
+
+    .checkout-details,
+    .checkout-form {
+        max-height: none;
     }
 }
 
@@ -1098,8 +1112,29 @@ button, input, select {
         flex-wrap: wrap;
     }
 
+    .checkout-modal {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        border-radius: 24px;
+    }
+
+    .checkout-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+        padding: 1rem 1.25rem;
+    }
+
     .checkout-body {
         grid-template-columns: 1fr;
+        padding: 1rem 1.25rem 1.25rem;
+        max-height: none;
+    }
+
+    .checkout-details,
+    .checkout-form {
+        max-height: none;
     }
 
     .form-row {
