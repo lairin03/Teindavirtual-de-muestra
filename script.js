@@ -345,14 +345,28 @@ function openCheckoutForm() {
             </div>
             <div class="checkout-body">
                 <div class="checkout-details">
-                    <h3>Resumen del pedido</h3>
+                    <div class="summary-header">
+                        <h3>Resumen del pedido</h3>
+                        <p class="summary-note">Verifica cantidad, talla y color antes de realizar el pago.</p>
+                    </div>
                     ${cart.map(item => `
                         <div class="checkout-item">
-                            <span>${item.name} x${item.quantity}</span>
+                            <div class="checkout-item-info">
+                                <span class="checkout-item-name">${item.name} x${item.quantity}</span>
+                                <span class="checkout-item-meta">${item.size} · ${item.color}</span>
+                            </div>
                             <span>$${(item.price * item.quantity).toFixed(2)}</span>
                         </div>
                     `).join('')}
-                    <div class="checkout-item total-row">
+                    <div class="checkout-summary-row">
+                        <span>Subtotal</span>
+                        <span>${subtotalLabel.textContent}</span>
+                    </div>
+                    <div class="checkout-summary-row">
+                        <span>Envío</span>
+                        <span>${shippingLabel.textContent}</span>
+                    </div>
+                    <div class="checkout-summary-row total-row">
                         <strong>Total</strong>
                         <strong>${totalLabel.textContent}</strong>
                     </div>
@@ -388,16 +402,24 @@ function openCheckoutForm() {
     const checkoutForm = document.getElementById('checkoutForm');
     const checkoutModalOverlay = document.querySelector('.checkout-modal-overlay');
 
-    closeCheckout.addEventListener('click', () => checkoutContainer.remove());
-    checkoutModalOverlay.addEventListener('click', () => checkoutContainer.remove());
+    const closeModal = () => {
+        checkoutContainer.remove();
+        document.body.classList.remove('modal-open');
+        document.documentElement.classList.remove('modal-open');
+    };
+
+    closeCheckout.addEventListener('click', closeModal);
+    checkoutModalOverlay.addEventListener('click', closeModal);
     checkoutForm.addEventListener('submit', event => {
         event.preventDefault();
         showToast('Pago procesado con éxito. Gracias por tu compra.');
         cart = [];
         updateCart();
-        checkoutContainer.remove();
+        closeModal();
         toggleCart(false);
     });
+    document.body.classList.add('modal-open');
+    document.documentElement.classList.add('modal-open');
 }
 
 renderProducts(products);
